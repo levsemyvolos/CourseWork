@@ -1,0 +1,122 @@
+2024-06-06 18:18:30 INFO  o.e.coursework.RateWorkApplication - Starting RateWorkApplication using Java 22 with PID 17380 (C:\Users\maksy\IdeaProjects\RateWork\target\classes started by maksy in C:\Users\maksy\IdeaProjects\RateWork)
+2024-06-06 18:18:30 DEBUG o.e.coursework.RateWorkApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-06 18:18:30 INFO  o.e.coursework.RateWorkApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-06 18:18:30 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-06 18:18:31 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 47 ms. Found 5 JPA repository interfaces.
+2024-06-06 18:18:31 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-06-06 18:18:31 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-06-06 18:18:31 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-06 18:18:31 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-06 18:18:31 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-06 18:18:31 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1130 ms
+2024-06-06 18:18:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-06-06 18:18:31 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5882b202
+2024-06-06 18:18:31 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-06-06 18:18:32 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-06 18:18:32 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-06-06 18:18:32 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-06-06 18:18:32 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-06 18:18:33 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-06 18:18:33 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-06 18:18:33 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-06 18:18:33 WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: 236427d7-0e36-4e97-b3a9-7cfe5706db1f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-06-06 18:18:33 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-06 18:18:33 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@106f0051, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@4fe687b5, org.springframework.security.web.context.SecurityContextHolderFilter@49318c2a, org.springframework.security.web.header.HeaderWriterFilter@78b293a, org.springframework.web.filter.CorsFilter@7a02d760, org.springframework.security.web.csrf.CsrfFilter@65a7bc80, org.springframework.security.web.authentication.logout.LogoutFilter@2f6f2d91, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3d5b2c1e, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@6a450cb5, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@5a86112a, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@74b13aa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@59eb987a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74214ac3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3203ffa3, org.springframework.security.web.access.ExceptionTranslationFilter@4d305059, org.springframework.security.web.access.intercept.AuthorizationFilter@7ecca48]
+2024-06-06 18:18:33 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-06-06 18:18:34 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-06-06 18:18:34 INFO  o.e.coursework.RateWorkApplication - Started RateWorkApplication in 4.114 seconds (process running for 4.738)
+2024-06-06 18:28:08 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-06 18:28:08 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-06 18:28:08 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 1 ms
+2024-06-06 19:25:36 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-06 19:25:36 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-06-06 19:25:36 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-06-06 19:29:00 INFO  o.e.coursework.RateWorkApplication - Starting RateWorkApplication using Java 22 with PID 16476 (C:\Users\maksy\IdeaProjects\RateWork\target\classes started by maksy in C:\Users\maksy\IdeaProjects\RateWork)
+2024-06-06 19:29:00 DEBUG o.e.coursework.RateWorkApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-06 19:29:00 INFO  o.e.coursework.RateWorkApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-06 19:29:01 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-06 19:29:01 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 44 ms. Found 5 JPA repository interfaces.
+2024-06-06 19:29:01 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-06-06 19:29:01 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-06-06 19:29:01 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-06 19:29:01 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-06 19:29:01 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-06 19:29:01 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 1067 ms
+2024-06-06 19:29:01 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-06-06 19:29:02 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@19002b34
+2024-06-06 19:29:02 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-06-06 19:29:02 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-06 19:29:02 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-06-06 19:29:02 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-06-06 19:29:02 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-06 19:29:03 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-06 19:29:03 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-06 19:29:03 WARN  o.s.b.w.s.c.AnnotationConfigServletWebServerApplicationContext - Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'securityService': Unsatisfied dependency expressed through field 'passwordEncoder': No qualifying bean of type 'org.springframework.security.crypto.password.PasswordEncoder' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {@org.springframework.beans.factory.annotation.Autowired(required=true)}
+2024-06-06 19:29:03 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-06 19:29:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-06-06 19:29:03 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
+2024-06-06 19:29:03 INFO  o.a.catalina.core.StandardService - Stopping service [Tomcat]
+2024-06-06 19:29:03 INFO  o.s.b.a.l.ConditionEvaluationReportLogger - 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2024-06-06 19:29:03 ERROR o.s.b.d.LoggingFailureAnalysisReporter - 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Field passwordEncoder in org.example.coursework.Service.SecurityService required a bean of type 'org.springframework.security.crypto.password.PasswordEncoder' that could not be found.
+
+The injection point has the following annotations:
+	- @org.springframework.beans.factory.annotation.Autowired(required=true)
+
+
+Action:
+
+Consider defining a bean of type 'org.springframework.security.crypto.password.PasswordEncoder' in your configuration.
+
+2024-06-06 19:39:47 INFO  o.e.coursework.RateWorkApplication - Starting RateWorkApplication using Java 22 with PID 14048 (C:\Users\maksy\IdeaProjects\RateWork\target\classes started by maksy in C:\Users\maksy\IdeaProjects\RateWork)
+2024-06-06 19:39:47 DEBUG o.e.coursework.RateWorkApplication - Running with Spring Boot v3.3.0, Spring v6.1.8
+2024-06-06 19:39:47 INFO  o.e.coursework.RateWorkApplication - No active profile set, falling back to 1 default profile: "default"
+2024-06-06 19:39:48 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-06-06 19:39:48 INFO  o.s.d.r.c.RepositoryConfigurationDelegate - Finished Spring Data repository scanning in 38 ms. Found 5 JPA repository interfaces.
+2024-06-06 19:39:48 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat initialized with port 8080 (http)
+2024-06-06 19:39:48 INFO  o.a.coyote.http11.Http11NioProtocol - Initializing ProtocolHandler ["http-nio-8080"]
+2024-06-06 19:39:48 INFO  o.a.catalina.core.StandardService - Starting service [Tomcat]
+2024-06-06 19:39:48 INFO  o.a.catalina.core.StandardEngine - Starting Servlet engine: [Apache Tomcat/10.1.24]
+2024-06-06 19:39:48 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring embedded WebApplicationContext
+2024-06-06 19:39:48 INFO  o.s.b.w.s.c.ServletWebServerApplicationContext - Root WebApplicationContext: initialization completed in 985 ms
+2024-06-06 19:39:48 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Starting...
+2024-06-06 19:39:49 INFO  com.zaxxer.hikari.pool.HikariPool - HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@68aec50
+2024-06-06 19:39:49 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Start completed.
+2024-06-06 19:39:49 INFO  o.h.jpa.internal.util.LogHelper - HHH000204: Processing PersistenceUnitInfo [name: default]
+2024-06-06 19:39:49 INFO  org.hibernate.Version - HHH000412: Hibernate ORM core version 6.5.2.Final
+2024-06-06 19:39:49 INFO  o.h.c.i.RegionFactoryInitiator - HHH000026: Second-level cache disabled
+2024-06-06 19:39:49 INFO  o.s.o.j.p.SpringPersistenceUnitInfo - No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-06-06 19:39:50 INFO  o.h.e.t.j.p.i.JtaPlatformInitiator - HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2024-06-06 19:39:50 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-06-06 19:39:50 WARN  o.s.b.a.o.j.JpaBaseConfiguration$JpaWebConfiguration - spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-06-06 19:39:50 WARN  o.s.b.a.s.s.UserDetailsServiceAutoConfiguration - 
+
+Using generated security password: a4f3eba0-ec17-49e8-bbc0-b882abe23e56
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2024-06-06 19:39:50 INFO  o.s.s.c.a.a.c.InitializeUserDetailsBeanManagerConfigurer$InitializeUserDetailsManagerConfigurer - Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2024-06-06 19:39:50 INFO  o.s.s.web.DefaultSecurityFilterChain - Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@73bb782d, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@3a3375d8, org.springframework.security.web.context.SecurityContextHolderFilter@139da216, org.springframework.security.web.header.HeaderWriterFilter@31f90517, org.springframework.web.filter.CorsFilter@63bb719d, org.springframework.security.web.csrf.CsrfFilter@1c0ec502, org.springframework.security.web.authentication.logout.LogoutFilter@4fe687b5, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@60147536, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@2553fbd0, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@38e100ab, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@77d7d2d0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3ce067bd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1ef8f7e6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@10b36d8a, org.springframework.security.web.access.ExceptionTranslationFilter@31406eab, org.springframework.security.web.access.intercept.AuthorizationFilter@1ae37be2]
+2024-06-06 19:39:50 INFO  o.a.coyote.http11.Http11NioProtocol - Starting ProtocolHandler ["http-nio-8080"]
+2024-06-06 19:39:50 INFO  o.s.b.w.e.tomcat.TomcatWebServer - Tomcat started on port 8080 (http) with context path '/'
+2024-06-06 19:39:50 INFO  o.e.coursework.RateWorkApplication - Started RateWorkApplication in 3.691 seconds (process running for 4.185)
+2024-06-06 19:39:53 INFO  o.a.c.c.C.[Tomcat].[localhost].[/] - Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-06-06 19:39:53 INFO  o.s.web.servlet.DispatcherServlet - Initializing Servlet 'dispatcherServlet'
+2024-06-06 19:39:53 INFO  o.s.web.servlet.DispatcherServlet - Completed initialization in 0 ms
+2024-06-06 19:40:07 INFO  o.s.o.j.LocalContainerEntityManagerFactoryBean - Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-06-06 19:40:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown initiated...
+2024-06-06 19:40:07 INFO  com.zaxxer.hikari.HikariDataSource - HikariPool-1 - Shutdown completed.
