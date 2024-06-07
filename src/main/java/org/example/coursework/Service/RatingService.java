@@ -1,16 +1,12 @@
 package org.example.coursework.Service;
-
 import org.example.coursework.exception.RatingNotFoundException;
 import org.example.coursework.model.Rating;
 import org.example.coursework.repository.RatingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
-
 @Service
 public class RatingService {
-
     @Autowired
     private RatingRepository ratingRepository;
 
@@ -31,10 +27,8 @@ public class RatingService {
         Rating rating = ratingRepository.findById(id)
                 .orElseThrow(() -> new RatingNotFoundException("Рейтинг с указанным id не найден"));
         rating.setScore(updatedRating.getScore());
-        rating.setComment(updatedRating.getComment());
         rating.setUser(updatedRating.getUser());
         rating.setGame(updatedRating.getGame());
-        rating.setCreatedAt(updatedRating.getCreatedAt());
         return ratingRepository.save(rating);
     }
 

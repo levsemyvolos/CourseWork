@@ -1,29 +1,27 @@
 package org.example.coursework.controller;
-
 import org.example.coursework.model.Comment;
 import org.example.coursework.Service.CommentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
-
 @RestController
 @RequestMapping("/comment")
 public class CommentController {
-
     @Autowired
     private CommentService commentService;
 
-    @GetMapping
-    public List<Comment> getAllComments() {
-        return commentService.getAllComments();
+    @GetMapping("/")
+    public ResponseEntity<?> getAllComments() {
+        List<Comment> comments = commentService.getAllComments();
+        return ResponseEntity.ok(comments);
     }
 
-    @PostMapping
+    @PostMapping("/")
     public ResponseEntity<Comment> createComment(@RequestBody Comment comment) {
-        Comment createdComment = commentService.createComment(comment.getUser().getId(), comment.getGame().getId(), comment.getContent());
-        return ResponseEntity.ok(createdComment);
+        Comment createdComment = commentService.createComment(comment);
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdComment);
     }
 
     @GetMapping("/{id}")
@@ -37,10 +35,20 @@ public class CommentController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Comment> updateComment(@PathVariable Long id, @RequestBody Comment updatedComment) {
+    public ResponseEntity<Comment> updateComment(@PathVariable(name = "id") Long id, @RequestBody Comment updatedComment) {
         Comment comment = commentService.updateComment(id, updatedComment);
         if (comment != null) {
             return ResponseEntity.ok(comment);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Long id) {
+        boolean deleted = commentService.deleteComment(id);
+        if (deleted) {
+            return ResponseEntity.noContent().build();
         } else {
             return ResponseEntity.notFound().build();
         }

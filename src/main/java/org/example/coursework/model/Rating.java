@@ -1,28 +1,23 @@
 package org.example.coursework.model;
-
 import jakarta.persistence.*;
-
 import java.time.LocalDateTime;
-
-@Entity(name = "rating")
+@Entity
+@Table(name = "rating")
 public class Rating {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private int score;
-    private String comment;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
     @ManyToOne
-    @JoinColumn(name = "game_id")
+    @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 
-    private LocalDateTime createdAt;
 
     // Getters and Setters
     public Long getId() {
@@ -41,13 +36,6 @@ public class Rating {
         this.score = score;
     }
 
-    public String getComment() {
-        return comment;
-    }
-
-    public void setComment(String comment) {
-        this.comment = comment;
-    }
 
     public User getUser() {
         return user;
@@ -63,13 +51,5 @@ public class Rating {
 
     public void setGame(Game game) {
         this.game = game;
-    }
-
-    public LocalDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(LocalDateTime createdAt) {
-        this.createdAt = createdAt;
     }
 }

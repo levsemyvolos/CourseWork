@@ -1,11 +1,8 @@
 package org.example.coursework.model;
-
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
-
 @Entity(name = "comment")
 public class Comment {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -13,15 +10,15 @@ public class Comment {
     private String content;
     private LocalDateTime createdAt;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne
-    @JoinColumn(name = "game_id")
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "game_id", nullable = false)
     private Game game;
 
-    // Getters and Setters
+// Getters and Setters
 
     public Long getId() {
         return id;
@@ -62,4 +59,5 @@ public class Comment {
     public void setGame(Game game) {
         this.game = game;
     }
+
 }

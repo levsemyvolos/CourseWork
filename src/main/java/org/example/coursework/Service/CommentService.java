@@ -1,5 +1,4 @@
 package org.example.coursework.Service;
-
 import org.example.coursework.model.Comment;
 import org.example.coursework.model.Game;
 import org.example.coursework.model.User;
@@ -10,13 +9,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
 public class CommentService {
-
     private static final Logger logger = LoggerFactory.getLogger(CommentService.class);
 
     @Autowired
@@ -33,18 +30,16 @@ public class CommentService {
         return commentRepository.findAll();
     }
 
-    public Comment createComment(Long userId, Long gameId, String content) {
+    public Comment createComment(Comment comment) {
         logger.info("Creating comment");
 
-        User user = userRepository.findById(userId)
+        User user = userRepository.findById(comment.getUser().getId())
                 .orElseThrow(() -> new RuntimeException("User not found"));
-        Game game = gameRepository.findById(gameId)
+        Game game = gameRepository.findById(comment.getGame().getId())
                 .orElseThrow(() -> new RuntimeException("Game not found"));
 
-        Comment comment = new Comment();
         comment.setUser(user);
         comment.setGame(game);
-        comment.setContent(content);
         comment.setCreatedAt(LocalDateTime.now());
 
         logger.info("Comment created: {}", comment);
@@ -64,20 +59,29 @@ public class CommentService {
                 .orElseThrow(() -> new RuntimeException("Comment not found"));
 
         comment.setContent(updatedComment.getContent());
-        comment.setCreatedAt(updatedComment.getCreatedAt());
-        comment.setUser(updatedComment.getUser());
-        comment.setGame(updatedComment.getGame());
+        // Обновляем createdAt только если это необходимо
+        if (updatedComment.getCreatedAt() != null) {
+            comment.setCreatedAt(updatedComment.getCreatedAt());
+        }
+        // Обновляем user и game только если это необходимо
+        if (updatedComment.getUser() != null) {
+            comment.setUser(updatedComment.getUser());
+        }
+        if (updatedComment.getGame() != null) {
+            comment.setGame(updatedComment.getGame());
+        }
 
         logger.info("Updated comment: {}", comment);
 
         return commentRepository.save(comment);
     }
 
-    public void deleteComment(Long id) {
-        logger.info("Deleting comment with id {}", id);
-        commentRepository.deleteById(id);
-        logger.info("Comment deleted successfully");
+    public boolean deleteComment(Long id) {
+        if (commentRepository.existsById(id)) {
+            commentRepository.deleteById(id);
+            return true;
+        }else {
+            return false;
+        }
     }
 }
-
-

@@ -1,15 +1,11 @@
 package org.example.coursework.model;
-
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import java.time.LocalDate;
-
+import java.util.ArrayList;
+import java.util.List;
 @Entity(name = "game")
 public class Game {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,6 +18,19 @@ public class Game {
     private Double averageRating;
 
     public Game() {
+    }
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "game", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Comment> comments =  new ArrayList<>();
+
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     public Long getId() {
@@ -80,4 +89,3 @@ public class Game {
         this.averageRating = averageRating;
     }
 }
-

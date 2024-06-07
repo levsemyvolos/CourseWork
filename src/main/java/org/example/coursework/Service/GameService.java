@@ -1,18 +1,14 @@
 package org.example.coursework.Service;
-
 import org.example.coursework.exception.GameNotFoundException;
 import org.example.coursework.model.Game;
 import org.example.coursework.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
-
 @Service
 public class GameService {
-
     @Autowired
     private GameRepository gameRepository;
 
@@ -35,6 +31,5 @@ public class GameService {
     public List<Game> getAllGames() {
         return gameRepository.findAll();
     }
-
 }
 
