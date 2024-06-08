@@ -6,11 +6,13 @@ import org.example.coursework.model.User;
 import org.example.coursework.repository.RoleRepository;
 import org.example.coursework.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Optional;
@@ -27,6 +29,7 @@ public class UserService implements org.springframework.security.core.userdetail
     private RoleRepository roleRepository;
 
     @Autowired
+    @Lazy
     private PasswordEncoder passwordEncoder;
 
     public User createUser(String username, String email, String password) {
