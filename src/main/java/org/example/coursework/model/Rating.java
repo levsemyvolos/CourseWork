@@ -1,6 +1,6 @@
 package org.example.coursework.model;
+
 import jakarta.persistence.*;
-import java.time.LocalDateTime;
 @Entity
 @Table(name = "rating")
 public class Rating {
@@ -52,4 +52,4 @@ public class Rating {
     public void setGame(Game game) {
         this.game = game;
     }
-}
+}//

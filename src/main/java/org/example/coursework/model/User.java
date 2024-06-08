@@ -1,7 +1,8 @@
 package org.example.coursework.model;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import org.example.coursework.model.Role;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -88,4 +89,4 @@ public class User {
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
-}
+}//

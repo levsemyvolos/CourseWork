@@ -10,4 +10,4 @@ public class RateWorkApplication {
     public static void main(String[] args) {
         SpringApplication.run(RateWorkApplication.class, args);
     }
-}
+}//

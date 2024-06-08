@@ -44,4 +44,4 @@ public class GameController {
         Game game = gameRepository.findById(id).orElseThrow(() -> new RuntimeException("Game not found"));
         gameRepository.delete(game);
     }
-}
+}//

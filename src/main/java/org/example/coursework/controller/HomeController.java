@@ -10,4 +10,4 @@ public class HomeController {
     public String home() {
         return "index"; // Проверьте, что у вас есть файл index.html в директории resources/templates
     }
-}
+}//

@@ -33,4 +33,4 @@ public class AuthController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         return ResponseEntity.ok("User authenticated");
     }
-}
+}//

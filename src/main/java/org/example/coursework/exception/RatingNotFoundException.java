@@ -10,4 +10,4 @@ public class RatingNotFoundException extends RuntimeException {
     public RatingNotFoundException(String message, Throwable cause) {
         super(message, cause);
     }
-}
+}//

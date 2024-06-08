@@ -67,4 +67,4 @@ public class UserService implements org.springframework.security.core.userdetail
                 .collect(Collectors.toSet());
         return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), authorities);
     }
-}
+}//
