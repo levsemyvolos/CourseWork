@@ -776,4 +776,165 @@ public class User {
     }
 }//
 ```
+![image](https://github.com/MaksymGurzhiy/CourseWork/assets/127398854/fe5aee5a-b072-4596-b799-7f187833a6b8)
+
+## Repository
+Клас CommentRepository
+```
+package org.example.coursework.repository;
+
+import org.example.coursework.model.Comment;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface CommentRepository extends JpaRepository<Comment, Long> {
+}//
+```
+Клас GameRepository 
+```
+package org.example.coursework.repository;
+import org.example.coursework.model.Game;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface GameRepository extends JpaRepository<Game, Long> {
+}//
+```
+Клас RatingRepository
+```
+package org.example.coursework.repository;
+import org.example.coursework.model.Rating;
+import org.springframework.data.jpa.repository.JpaRepository;
+public interface RatingRepository extends JpaRepository<Rating, Long> {
+}//
+```
+Клас UserRepository
+```
+package org.example.coursework.repository;
+
+import org.example.coursework.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, Long> {
+    User findByUsername(String username);
+}//
+```
+
+## Розділ 4 - Проектування і Розробка Журналювання
+
+Журналювання в програмуванні - це процес реєстрації подій та інформації про стан програми під час її виконання. Журнали створюються з метою відстеження роботи програми, виявлення помилок, відладки, моніторингу продуктивності та аналізу даних.
+Основні принципи журналювання:
+Реєстрація подій: Журнал відстежує різні події в програмі, такі як запуск, завершення, помилки, виклики методів, створення та оновлення об'єктів тощо.
+
+Рівні журналювання: Журнал може мати різні рівні, такі як DEBUG, INFO, WARN, ERROR. Кожен рівень має свою важливість, інформаційність та використання. Наприклад:
+У класі CommentService:
+```private static final Logger logger = LoggerFactory.getLogger(CommentService.class);```
+Цей логер використовується для журналювання різних подій, таких як створення, оновлення і видалення коментарів.
+
+У класі RoleService:
+```private static final Logger logger = LoggerFactory.getLogger(RoleService.class);```
+Цей логер використовується для журналювання різних подій, таких як створення і отримання ролей користувачів.
+
+У класі UserService:
+```private static final Logger logger = LoggerFactory.getLogger(UserService.class);```
+Цей логер використовується для журналювання подій, таких як створення і отримання користувачів.
+
+Кожен з цих логерів використовується для реєстрації подій виконання різних операцій у програмі, таких як створення, оновлення, отримання або видалення коментарів, ролей або користувачів.
+
+## Розділ 5 - Проектування і Розробка Безпеки
+Проектування і розробка безпеки в програмному забезпеченні - це процес створення системи, яка забезпечує захист від різних загроз, зловмисних дій і вразливостей. Основною метою цього процесу є забезпечення конфіденційності, цілісності та доступності даних, а також захист від несанкціонованого доступу і зловмисних атак.
+Аутентифікація і авторизація: Це два основних процеси, які забезпечують ідентифікацію користувачів і надають їм відповідні права доступу до ресурсів системи. Аутентифікація перевіряє, чи користувач має право доступу до системи, а авторизація визначає, які конкретно дії він може виконати.
+
+Налаштування Security Spring
+Security Config
+```
+package org.example.coursework.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+
+    private final UserDetailsService userDetailsService;
+
+    public SecurityConfig(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
+
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf(csrf -> csrf.disable())
+                .authorizeHttpRequests(authorize -> authorize
+                        .anyRequest().permitAll() // Разрешить все запросы
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .headers(headers -> headers.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)));
+
+        return http.build();
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
+    @Bean
+    public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration) throws Exception {
+        return authenticationConfiguration.getAuthenticationManager();
+    }
+}//
+```
+AuthController
+```
+package org.example.coursework.controller;
+
+import org.example.coursework.model.User;
+import org.example.coursework.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthController {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private UserService userService;
+
+    @PostMapping("/register")
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
+        User newUser = userService.createUser(user.getUsername(), user.getEmail(), user.getPassword());
+        return ResponseEntity.ok(newUser);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<String> authenticateUser(@RequestBody User loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        return ResponseEntity.ok("User authenticated");
+    }
+}
+```
+Шифрування даних: Дані, що передаються через мережу або зберігаються на сервері, повинні бути зашифровані для захисту від несанкціонованого доступу. Шифрування дозволяє забезпечити конфіденційність даних, що зберігаються в базі даних або передаються між клієнтом і сервером.
+Захист від атак: Включає в себе заходи для запобігання різноманітним типам атак, таким як кросс-сайтовий скриптінг (XSS), SQL-ін'єкції, витік інформації, перехоплення сесій тощо. Ці заходи можуть включати в себе валідацію введених даних, використання параметризованих запитів, використання механізмів шифрування та інші техніки.
+
+Захист від атак: Включає в себе заходи для запобігання різноманітним типам атак, таким як кросс-сайтовий скриптінг (XSS), SQL-ін'єкції, витік інформації, перехоплення сесій тощо. Ці заходи можуть включати в себе валідацію введених даних, використання параметризованих запитів, використання механізмів шифрування та інші техніки.
 
