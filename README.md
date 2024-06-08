@@ -13,7 +13,7 @@
 - Розділ 5 - Проектування і розробка безпеки
 
 Зараз ми детально розглянемо процесс проектування та разробки кожного з розділів.
-### Реалізація Розділ 1 - Проектування і розробка веб-шару (REST-запити)
+## Реалізація Розділ 1 - Проектування і розробка веб-шару (REST-запити)
 REST (Representational State Transfer) є архітектурним стилем для розробки веб-сервісів, який базується на принципах простоти, легкості розуміння та масштабованості. REST-архітектура використовує HTTP протокол для передачі даних між клієнтом та сервером. Підходить для розробки як веб-додатків, так і мобільних додатків.
 
 Основні принципи REST:
@@ -196,7 +196,7 @@ public ResponseEntity<Void> deleteRating(@PathVariable Long id) {
 }
 }
 ```
-### Розділ 2 - Проектування і розробка сервісного шару 
+## Розділ 2 - Проектування і розробка сервісного шару 
 Сервісний шар (Service Layer) є ключовим елементом багатошарової архітектури додатка. Він відіграє важливу роль у відокремленні бізнес-логіки від інших компонентів додатка, таких як контролери та шари доступу до даних. Основні принципи та завдання сервісного шару включають наступне:
 
 Реалізація бізнес-логіки: Сервісний шар містить всі необхідні методи та операції, які визначають бізнес-логіку додатка. Цей шар відповідає за обробку бізнес-правил, алгоритмів та операцій, які визначають основний функціонал додатка.
@@ -336,8 +336,9 @@ public class GameService {
         return gameRepository.findAll();
     }
 }
-
+```
 Сервіс для рейтингу
+```
 package org.example.coursework.Service;
 import org.example.coursework.exception.RatingNotFoundException;
 import org.example.coursework.model.Rating;
@@ -455,6 +456,324 @@ public class UserService implements org.springframework.security.core.userdetail
     }
 }//
 ```
+## Розділ 3 - Проектування і розробка шару сховища
+Шар сховища або доступу до даних (Data Access Layer) - це компонент програмного забезпечення, який відповідає за взаємодію з базою даних або будь-яким іншим механізмом зберігання даних. Його головна мета - забезпечити доступ до даних з інших частин програми та іншого програмного забезпечення.
+
+Одним з головних завдань шару сховища є взаємодія з базою даних. Це включає в себе виконання операцій, таких як збереження (INSERT), оновлення (UPDATE), видалення (DELETE) та отримання (SELECT) даних з бази даних.
+Зазвичай шар сховища використовує мову запитів, таку як SQL (Structured Query Language), для взаємодії з базою даних. SQL дозволяє виконувати різноманітні операції з даними, такі як фільтрація, сортування, з'єднання тощо.
+
+Реалізація
+Клас Comment
+```
+package org.example.coursework.model;
+import jakarta.persistence.*;
+import java.time.LocalDateTime;
+@Entity(name = "comment")
+public class Comment {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String content;
+    private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "game_id", nullable = false)
+    private Game game;
+
+// Getters and Setters
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+}//
+```
+Клас Game
+```
+package org.example.coursework.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+@Entity(name = "game")
+public class Game {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String title;
+    private String description;
+    private LocalDate releaseDate;
+    private String developer;
+    private String publisher;
+    private Double averageRating;
+
+    public Game() {
+    }
+
+    @OneToMany(fetch = FetchType.EAGER,mappedBy = "game", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<Comment> comments =  new ArrayList<>();
 
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDate getReleaseDate() {
+        return releaseDate;
+    }
+
+    public void setReleaseDate(LocalDate releaseDate) {
+        this.releaseDate = releaseDate;
+    }
+
+    public String getDeveloper() {
+        return developer;
+    }
+
+    public void setDeveloper(String developer) {
+        this.developer = developer;
+    }
+
+    public String getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(String publisher) {
+        this.publisher = publisher;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+}//
+```
+Клас Rating 
+```
+package org.example.coursework.model;
+
+import jakarta.persistence.*;
+@Entity
+@Table(name = "rating")
+public class Rating {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private int score;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "game_id", nullable = false)
+    private Game game;
+
+
+    // Getters and Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
+
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+}//
+```
+Клас User 
+```
+package org.example.coursework.model;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+@Entity(name = "users")
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String username;
+    private String email;
+    private String password;
+    private LocalDateTime createdAt;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(
+            name = "user_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JsonIgnore
+    private List<Comment> comments = new ArrayList<>();
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+    // Constructors, getters and setters
+    public User() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+}//
+```
 
