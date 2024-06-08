@@ -776,6 +776,47 @@ public class User {
     }
 }//
 ```
+
+Клас Role
+```
+package org.example.coursework.model;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+@Entity(name = "role")
+public class Role {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String name;
+
+    public Role() {
+    }
+
+    public Role(String name) {
+        this.name = name;
+    }
+
+    // Getters and setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+}//
+```
 ![image](https://github.com/MaksymGurzhiy/CourseWork/assets/127398854/fe5aee5a-b072-4596-b799-7f187833a6b8)
 
 ## Repository
@@ -828,13 +869,54 @@ public interface UserRepository extends JpaRepository<User, Long> {
 ```private static final Logger logger = LoggerFactory.getLogger(CommentService.class);```
 Цей логер використовується для журналювання різних подій, таких як створення, оновлення і видалення коментарів.
 
-У класі RoleService:
-```private static final Logger logger = LoggerFactory.getLogger(RoleService.class);```
-Цей логер використовується для журналювання різних подій, таких як створення і отримання ролей користувачів.
-
 У класі UserService:
 ```private static final Logger logger = LoggerFactory.getLogger(UserService.class);```
 Цей логер використовується для журналювання подій, таких як створення і отримання користувачів.
+
+У класі RoleService
+```
+package org.example.coursework.Service;
+import org.example.coursework.model.Role;
+import org.example.coursework.repository.RoleRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import java.util.List;
+@Service
+public class RoleService {
+    private static final Logger logger = LoggerFactory.getLogger(RoleService.class);
+
+    @Autowired
+    private RoleRepository roleRepository;
+
+    public Role createRole(String name) {
+        logger.info("Создание новой роли: {}", name);
+        Role role = new Role(name);
+        Role savedRole = roleRepository.save(role);
+        logger.info("Роль успешно создана: {}", savedRole);
+        return savedRole;
+    }
+
+    public Role getRoleById(Long roleId) {
+        logger.info("Поиск роли по ID: {}", roleId);
+        Role role = roleRepository.findById(roleId).orElse(null);
+        if (role != null) {
+            logger.info("Роль найдена: {}", role);
+        } else {
+            logger.info("Роль с ID {} не найдена", roleId);
+        }
+        return role;
+    }
+
+    public List<Role> getAllRoles() {
+        logger.info("Получение всех ролей");
+        List<Role> roles = roleRepository.findAll();
+        logger.info("Все роли успешно получены: {}", roles);
+        return roles;
+    }
+}
+```
 
 Кожен з цих логерів використовується для реєстрації подій виконання різних операцій у програмі, таких як створення, оновлення, отримання або видалення коментарів, ролей або користувачів.
 
