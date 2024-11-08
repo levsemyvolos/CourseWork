@@ -27,8 +27,12 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .csrf(csrf -> csrf.disable())
+//                .authorizeHttpRequests(authorize -> authorize
+//                        .anyRequest().permitAll() // Разрешить все запросы
+//                )
                 .authorizeHttpRequests(authorize -> authorize
-                        .anyRequest().permitAll() // Разрешить все запросы
+                        .requestMatchers("/auth/**").permitAll() // Дозволити доступ до авторизації та реєстрації
+                        .anyRequest().authenticated() // Вимагати автентифікації для інших запитів
                 )
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(headers -> headers.addHeaderWriter(new XFrameOptionsHeaderWriter(XFrameOptionsHeaderWriter.XFrameOptionsMode.SAMEORIGIN)));
